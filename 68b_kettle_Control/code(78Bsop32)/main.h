@@ -5,7 +5,7 @@
 // Const: exp: #define D_data 1 ----------------
 // base 1ms
 #define D_5ms 5
-#define D_1000ms 1000
+#define D_1000ms 3000
 // Globle Var -----------------------------------------
 #ifdef __main_c
 bit bLedFlash;

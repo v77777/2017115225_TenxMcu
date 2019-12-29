@@ -9,12 +9,12 @@
 #define __main_c
 #include "includeAll.h"
 int modeValue = 1;
-int i = 20;
+int i = 32;
 int j = 10;
 int flag = 0;
 //=============================================================================
 void main() {
-	
+	int k;
   SysInit();
   VarsInit();
   InitTriac();
@@ -30,9 +30,8 @@ void main() {
     //喂狗
     F_clearWDT();
     TimeProcess();
-    TaskSetting();
-    DisplayNumber(i);
-
+    //TaskSetting();
+    DisplayNumber(curTemp);
   }
 }
 //=============================================================================
@@ -40,6 +39,8 @@ void TimeProcess() {
   static uint8_t timer5ms = 0;
   static uint16_t second = 0;
 	uint16_t temp1,temp2,temp3,temp4;
+	
+	
   if (b1ms) {
     // 1ms 执行一次
     b1ms = 0;
@@ -68,9 +69,10 @@ void TimeProcess() {
 	P1_2 = 1;
 	P1_7 = 1;
 	P1MODL = P1MODL&0xCF;
-    GetKeys();
+  GetKeys();
 	P1_2 = 0;
 	P1_7 = 0;
+
 	/*P3_4 = 0;
 	P3_2 = 0;
 	P1MODL = temp1;
@@ -82,7 +84,7 @@ void TimeProcess() {
   }
   if (second >= D_1000ms) {
       second = 0;
-
+			GetTemp();
   }
 }
 //=============================================================================
@@ -95,7 +97,8 @@ void TaskSetting() {
 			modeValue = ~modeValue;		//模式标志为取反
 			led12 = ~led12;
 			P1_0 = ~P1_0;
-			i = i+30;
+			i = i+1;
+			DisplayProcess();
 		}
 		//P1MODL = P1MODL|0x20;		//将模式置为推挽输出，使LED显示
 		
@@ -107,11 +110,22 @@ void TaskSetting() {
 				P1_0 = ~P1_0;
 				led12 = ~led12;
 				P1_0 = ~P1_0;
+				DisplayProcess();
 			}
 		}
 }
 //=============================================================================
 void DisplayProcess() {
-	DisplayLED12();
-	DisplayLED14();
+	SysInit();
+  VarsInit();
+  InitTriac();
+  //使能看门狗
+  F_turnOnWDT();
+	led12 = 0;
+	led14 = 0;
+	P1_0 = 0;          // 开漏输出状态 且 数据位为0 时点
+	P1_4 = 0;
+	P1_2 = 0;
+	P1MODH = 0xaa;     //推挽输出状态控制蜂鸣器
+	//DisplayClear();
 }
