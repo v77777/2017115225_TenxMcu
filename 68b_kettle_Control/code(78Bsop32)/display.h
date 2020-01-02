@@ -22,6 +22,8 @@ extern bit bflag;
 void DisplayNumber(uint8_t number);
 void DisplayTenNumber(uint8_t number);
 void DisplayBitNumber(uint8_t number);
+void DisplayOn(uint8_t number);
+void DisplayClear2();
 void DisplayLED12(void);
 void DisplayLED14(void);
 #endif
