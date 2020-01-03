@@ -88,9 +88,10 @@ void GetTemp(void)
 				padInvalidTimer1 = D_padInvalidTime1;
 			}
 			bKettleValid = 1;
-
+			//？？？ AD转换原理未知
 			adFilterResult = (adFilterResult * 7 + adCurResult) / 8;
 			//adFilterResult = adCurResult;
+			//二分查找 对应AD值的数组下标 即 温度
 			head = 0;
 			end = D_tableSize - 1;
 			middle = (head + end) / 2;
