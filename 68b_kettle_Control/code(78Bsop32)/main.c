@@ -30,22 +30,27 @@ void main() {
 	P1_2 = 0;
 	P1MODH = 0xaa;     //ÍÆÍìÊä³ö×´Ì¬¿ØÖÆ·äÃùÆ÷
 	key4 = 1;
-	key3 = 1;
-  while (1) {
-  	while(key4){
+	
+	 while(key4){
   		F_clearWDT();
 			TimeProcess();
   		DisplayOn(1);
 			//DisplayNumber(i);		
 		}
-		
-		while(1){
+	key3 = 1;
+	_nop_();
+	_nop_();
+	_nop_();
+	_nop_();
+	_nop_();
+	while(key3){
   		F_clearWDT();
 		  TimeProcess();
   		DisplayNumber(i);		
-
 			//TaskSetting();
 		}
+	for(k=0;k<20000;k++) F_clearWDT();
+  while (1) {
     //Î¹¹·
     F_clearWDT();
     TimeProcess();
@@ -108,6 +113,7 @@ void TimeProcess() {
 	
 	if (timer100ms >= 100) {
 	timer100ms = 0;
+	
 	temp5 = P1MODL;
 	temp6 = P1MODH;
 	temp7 = P3MODL;

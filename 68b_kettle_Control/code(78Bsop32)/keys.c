@@ -23,7 +23,8 @@ void GetKeys() {
 
 void GetKey1(){
 	//P_key1 euqal 0
-	if(P_key1 == 0){key3 = 0; 
+	if(P_key1 == 0){
+	key3 = 0; 
 	//led12 = 1;
 	}
 	
@@ -31,7 +32,7 @@ void GetKey1(){
 
 void GetKey2(){
 	if(P_key2 == 0&& key_flag == 1){
-		if((i+10)<100){	i=i+10;}
+		if((i+10)<100){	i=i+1;}
 		else{i=99;}
 		key_flag = 0;
 		led12 = 1;
@@ -42,7 +43,7 @@ void GetKey2(){
 
 void GetKey3(){
 	if(P_key3 == 0 && key_flag == 1){
-		if((i-10)>0){ i = i - 10;}
+		if((i-10)>0){ i = i - 1;}
 		else{ i = 0; }
 		key_flag = 0;
 		led12 = 1;
