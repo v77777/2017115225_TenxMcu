@@ -16,8 +16,7 @@ int flag = 0;
 //=============================================================================
 void main() {
 
-	key4 = 1;
-	key3 = 1;
+	
 	i = 25;
   SysInit();
   VarsInit();
@@ -30,35 +29,37 @@ void main() {
 	P1_4 = 0;
 	P1_2 = 0;
 	P1MODH = 0xaa;     //ÍÆÍìÊä³ö×´Ì¬¿ØÖÆ·äÃùÆ÷
+	key4 = 1;
+	key3 = 1;
   while (1) {
   	while(key4){
   		F_clearWDT();
 			TimeProcess();
   		DisplayOn(1);
+			//DisplayNumber(i);		
 		}
 		
-		while(key3){
+		while(1){
   		F_clearWDT();
-			TimeProcess();
+		  TimeProcess();
   		DisplayNumber(i);		
-			//for(k=0;k<5000;k++);
+
 			//TaskSetting();
 		}
-		
     //Î¹¹·
     F_clearWDT();
     TimeProcess();
     //TaskSetting();
-  //  DisplayNumber(curTemp);
+    DisplayNumber(curTemp);
   }
 }
 //=============================================================================
 void TimeProcess() {
   static uint8_t timer5ms = 0;
-	static uint8_t timer100ms = 0;
+  static uint8_t timer100ms = 0;
   static uint16_t second = 0;
-	uint16_t temp1,temp2,temp3,temp4;
-	
+  uint16_t temp1,temp2,temp3,temp4,temp7,temp6,temp5,temp8;
+  	
 	
   if (b1ms) {
     // 1ms Ö´ÐÐÒ»´Î
@@ -68,11 +69,11 @@ void TimeProcess() {
     second++;
 }
   if (timer5ms >= D_5ms) {
-		timer5ms = 0;
-/*	temp1 = P1MODL;
-	temp2 = P1MODH;
-	temp3 = P3MODL;
-	temp4 = P3MODH;
+	timer5ms = 0;
+	temp5 = P1MODL;
+	temp6 = P1MODH;
+	temp7 = P3MODL;
+	temp8 = P3MODH;
 	
 	//1.7
 	P1MODH = 0x00;
@@ -83,32 +84,93 @@ void TimeProcess() {
 	//1.2
 	P1MODL = 0x00;
 	//SysInit();
-	//P3_4????
+	//P3_4
+	temp1 = P3_4;
+	temp2 = P3_2;
+	temp3 = P1_7;
+	temp4 = P1_2;
 	P3_4 = 1;
 	P3_2 = 1;
-	//P1_7????*/
+	//P1_7????
 	P1_2 = 1;
 	P1_7 = 1;
-	P1MODL = P1MODL&0xCF;
   GetKeys();
-	P1_2 = 0;
-	P1_7 = 0;
-	
-	/*P3_4 = 0;
-	P3_2 = 0;
-	P1MODL = temp1;
-	P1MODH = temp2;
-	P3MODL = temp3;
-	P3MODH = temp4;*/
+	P1_2 = temp4;
+	P1_7 = temp3;
+	P3_4 = temp1;
+	P3_2 = temp2;
+
+	P1MODL = temp5;
+	P1MODH = temp6;
+	P3MODL = temp7;
+	P3MODH = temp8;
   }
 	
 	if (timer100ms >= 100) {
-		timer100ms = 0;
+	timer100ms = 0;
+	temp5 = P1MODL;
+	temp6 = P1MODH;
+	temp7 = P3MODL;
+	temp8 = P3MODH;
+	P1MODH = 0x00;
+	P3MODL = 0x00;
+	P3MODH = 0x00;
+	P1MODL = 0x00;
+	temp1 = P3_4;
+	temp2 = P3_2;
+	temp3 = P1_7;
+	temp4 = P1_2;
+	P3_4 = 1;
+	P3_2 = 1;
+	P1_2 = 1;
+	P1_7 = 1;
+		GetKey1();
+	P1_2 = temp4;
+	P1_7 = temp3;
+	P3_4 = temp1;
+	P3_2 = temp2;
+
+	P1MODL = temp5;
+	P1MODH = temp6;
+	P3MODL = temp7;
+	P3MODH = temp8;
 		GetTemp();
 	}
 	
-  if (second >= D_1000ms) {
+if (second >= D_200ms) {
+	temp5 = P1MODL;
+	temp6 = P1MODH;
+	temp7 = P3MODL;
+	temp8 = P3MODH;
+	P1MODH = 0x00;
+	P3MODL = 0x00;
+	P3MODH = 0x00;
+	P1MODL = 0x00;
+	temp1 = P3_4;
+	temp2 = P3_2;
+	temp3 = P1_7;
+	temp4 = P1_2;
+	P3_4 = 1;
+	P3_2 = 1;
+	P1_2 = 1;
+	P1_7 = 1;
     second = 0;
+		GetKey2();
+	P3_4 = 1;
+	P3_2 = 1;
+	P1_2 = 1;
+	P1_7 = 1;
+		GetKey3();
+	P1_2 = temp4;
+	P1_7 = temp3;
+	P3_4 = temp1;
+	P3_2 = temp2;
+
+	P1MODL = temp5;
+	P1MODH = temp6;
+	P3MODL = temp7;
+	P3MODH = temp8;
+		key_flag = 1;
   }
 }
 //=============================================================================
@@ -152,3 +214,4 @@ void DisplayProcess() {
 	P1MODH = 0xaa;     //ÍÆÍìÊä³ö×´Ì¬¿ØÖÆ·äÃùÆ÷
 	//DisplayClear();
 }
+
