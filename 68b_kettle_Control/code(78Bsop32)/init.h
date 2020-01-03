@@ -14,6 +14,7 @@
 
 // Function ------------------------------------
 void SysInit();
+void keyInit();
 void VarsInit();
 
 #endif

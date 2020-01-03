@@ -46,5 +46,37 @@ void SysInit() {
   EA = 1;
   BuzzCount(500);
 }
+void keyInit() {
+  //P3_4端口开漏
+  P3_4 = 1;
+  //P3_2端口开漏
+  P3_2 = 1;
+  //P1_7端口开漏
+  P1_2 = 1;
+  P1_7 = 1;
+  STPPCK = 0;
+  STPFCK = 0;
+  _nop_();
+  _nop_();
+  _nop_();
+  _nop_();
+  _nop_();
+  SELFCK = 1;
+  _nop_();
+  _nop_();
+  _nop_();
+  _nop_();
+  _nop_();
+  _nop_();
+  _nop_();
+  _nop_();
+  _nop_();
+  _nop_();
+  // IO 模式初始化
+  P1MODL = 0xa8; 
+  P1MODH = 0xa2;
+  // IO 状态初始化 
+
+}
 //=============================================================================
 void VarsInit() {}
