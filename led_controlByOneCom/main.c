@@ -21,7 +21,7 @@ void main() {
 void TimeProcess() {
 
 static uint8_t timer5ms = 0;
-  static uint16_t second = 0;
+
 
   if (b1ms) {
     // 1ms 执行一次
